@@ -6,6 +6,21 @@ const ImportantPeople = require ('../models/importantPeople.model');
 
 
 
+exports.setAboutCompany = async (req, res) => {
+  
+  try{
+    const response = await User.findByIdAndUpdate(req.body.userId,{
+      $set: {
+        about: req.body.about
+      },
+    })
+    console.log(response)
+    res.json ("ok");
+  }
+  catch(error){
+    console.log(error)
+  }
+};
 
 exports.postJob = async (req, res) => {
   const newJob = new Job({ userId: req.body.id, ...req.body });
