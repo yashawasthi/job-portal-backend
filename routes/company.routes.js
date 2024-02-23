@@ -10,6 +10,5 @@ module.exports = app => {
   app.post ('/api/addPreviousWork',[authJwt.verifyToken],companyController.addPreviousWork);
   app.post('/api/deletePreviousWork/',[authJwt.verifyToken],companyController.deletePreviousWork);
   app.post('/api/deleteImportantPeople/',[authJwt.verifyToken],companyController.deleteImportantPeople);
-  app.post ('/api/setAboutCompany',[authJwt.verifyToken],companyController.setAboutCompany);
 
 };
