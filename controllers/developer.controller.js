@@ -2,24 +2,12 @@ const User = require ('../models/user.model');
 const Job = require ('../models/job.model');
 const WorkExperience = require ('../models/workExperience.model');
 const Project = require ('../models/project.model');
-const myCache=require('../mycache/cache');
-
-
 
 
 exports.allJobsForDeveloper = async (req, res) => {
   try{
-
-    if(myCache.has("jobsForDeveloper"))
-    {
-      const response = JSON.parse(myCache.get("jobsForDeveloper"));
-      return res.json (response);
-    }
     const response = await Job.find ({}).populate("userId","-__v");
-
-    myCache.set( "jobsForDeveloper", JSON.stringify(response));
-
-
+    console.log(response)
     res.json (response);
   }
   catch(error){
@@ -29,7 +17,6 @@ exports.allJobsForDeveloper = async (req, res) => {
 
 exports.getJobForDeveloper = async (req, res) => {
   const response = await Job.findById(req.body.id).populate("userId","-__v");
-
   console.log(response)
   res.json (response);
 };
