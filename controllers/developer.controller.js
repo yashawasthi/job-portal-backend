@@ -2,13 +2,14 @@ const User = require ('../models/user.model');
 const Job = require ('../models/job.model');
 const WorkExperience = require ('../models/workExperience.model');
 const Project = require ('../models/project.model');
-const NodeCache = require( "node-cache" );
-const myCache = new NodeCache();
+const myCache=require('../mycache/cache');
+
+
 
 
 exports.allJobsForDeveloper = async (req, res) => {
   try{
-    
+
     if(myCache.has("jobsForDeveloper"))
     {
       const response = JSON.parse(myCache.get("jobsForDeveloper"));
