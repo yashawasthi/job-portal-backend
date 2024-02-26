@@ -10,14 +10,14 @@ const myCache=require('../mycache/cache');
 exports.allJobsForDeveloper = async (req, res) => {
   try{
 
-    if(myCache.has("jobsForDeveloper"))
-    {
-      const response = JSON.parse(myCache.get("jobsForDeveloper"));
-      return res.json (response);
-    }
+    // if(myCache.has("jobsForDeveloper"))
+    // {
+    //   const response = JSON.parse(myCache.get("jobsForDeveloper"));
+    //   return res.json (response);
+    // }
     const response = await Job.find ({}).populate("userId","-__v");
 
-    myCache.set( "jobsForDeveloper", JSON.stringify(response));
+    // myCache.set( "jobsForDeveloper", JSON.stringify(response));
 
 
     res.json (response);
