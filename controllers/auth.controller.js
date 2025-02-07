@@ -9,7 +9,7 @@ exports.login = async (req, res) => {
   }).populate("workExperiences","-__v").populate("projects","-__v");
 
   if (!user) {
-    return {status: 'error', error: 'Invalid login'};
+    return res.json({status: 'error', error: 'Invalid login'});
   }
 
   const isPasswordValid = await bcrypt.compare (
@@ -57,10 +57,10 @@ exports.registerCompany = async (req, res) => {
 };
 
 exports.registerDeveloper = async (req, res) => {
-  // console.log (req.body);
+  console.log (req.body);
   try {
     const newPassword = await bcrypt.hash (req.body.password, 10);
-    await User.create ({
+    User.create ({
       email: req.body.email,
       isDeveloper: req.body.isDeveloper,
       password: newPassword,
@@ -68,6 +68,10 @@ exports.registerDeveloper = async (req, res) => {
       userName: req.body.userName,
       location: req.body.address,
       skills: req.body.skills,
+    }).then((response)=>{
+      console.log(response);
+    }).catch((err)=>{
+      console.log(err);
     });
     res.json ({status: 'ok'});
   } catch (err) {
